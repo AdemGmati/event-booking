@@ -1,9 +1,8 @@
 import { redirect } from 'next/navigation'
 
-import { LogoutButton } from '@/components/logout-button'
 import { createClient } from '@/lib/supabase/server'
 
-export default async function ProtectedPage() {
+export default async function BookingsPage() {
   const supabase = await createClient()
 
   const { data, error } = await supabase.auth.getClaims()
@@ -12,11 +11,11 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <div className="flex h-svh w-full items-center justify-center gap-2">
-      <p>
-        Hello <span>{data.claims.email}</span>
+    <div>
+      <h1 className="text-2xl font-semibold tracking-tight">My Bookings</h1>
+      <p className="mt-2 text-muted-foreground">
+        Your booked events will appear here.
       </p>
-      <LogoutButton />
     </div>
   )
 }
